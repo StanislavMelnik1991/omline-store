@@ -1,0 +1,38 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.main_wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", "Lato", Verdana, sans-serif;
+
+
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    /* ширина для вертикального скролла */
+    height: 4px;
+    /* высота для горизонтального скролла */
+    background-color: rgb(240, 240, 240);
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(41, 41, 41, 1);
+    border-radius: 9em;
+
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(41, 41, 41, 1);
+}
