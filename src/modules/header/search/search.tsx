@@ -17,7 +17,10 @@ export function Search() {
 				className={style.input}
 				placeholder='поиск'
 			/>
-			<button className={style.delete_button} onClick={() => { dispatch(changeFilterName('')); dispatch(filter()); }}>X</button>
+			<button
+				className={style.delete_button}
+				onClick={() => { dispatch(changeFilterName('')); dispatch(filter()); }}>X
+			</button>
 		</div>
 	);
 }

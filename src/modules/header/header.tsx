@@ -12,8 +12,11 @@ export function Header() {
 	const { color } = useAppSelector(state => state.dataReducer);
 	const { toggleShowBasket } = dataSlice.actions;
 	const dispatch = useAppDispatch();
+	const background = { 
+		background: `url(${mask}), radial-gradient(100% 215.42% at 0% 0%, ${color.bodyFirst} 0%, ${color.bodySecond} 180%` 
+	};
 	return (
-		<div className={style.wrapper} style={{ background: `url(${mask}), radial-gradient(100% 215.42% at 0% 0%, ${color.bodyFirst} 0%, ${color.bodySecond} 180%` }}>
+		<div className={style.wrapper} style={background}>
 			<InlineSVG src={require('../../assets/caparol.svg')} className={style.logo} />
 			<div className={style.search}>
 				<Search />

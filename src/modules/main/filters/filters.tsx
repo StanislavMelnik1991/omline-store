@@ -52,6 +52,9 @@ export function Filters() {
 			/>
 		</div>
 
-		<button onClick={() => { dispatch(removeFilters()); dispatch(filter()); }} className={style.button}>Удалить фильтры</button>
+		<button
+			onClick={() => { dispatch(removeFilters()); dispatch(filter()); }}
+			className={style.button}>Удалить фильтры
+		</button>
 	</div>;
 }

@@ -14,9 +14,10 @@ type CardType = {
 export function Card({ src, name, fullName, price, quantity, stockQuantity, article }: CardType) {
 	const { color, basket } = useAppSelector(state => state.dataReducer);
 	const { changeQuantity, addToBasket, changeBasketQuantity } = dataSlice.actions;
+	const background = { background: `radial-gradient(100% 120.42% at 0% 0%, ${color.cards} 10%, ${color.bodyFirst} 100%)` };
 	const dispatch = useAppDispatch();
 	return (
-		<div className={style.card_wrapper} style={{ background: `radial-gradient(100% 120.42% at 0% 0%, ${color.cards} 10%, ${color.bodyFirst} 100%)` }} >
+		<div className={style.card_wrapper} style={background} >
 			<div className={style.img_wrapper}>
 				<img src={src} alt={name} className={style.img_preview} />
 			</div>

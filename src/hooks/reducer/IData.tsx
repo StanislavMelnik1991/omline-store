@@ -33,7 +33,14 @@ export interface Filters {
     sort: Record<Sort, boolean>;
     name: string;
 }
-export type Sort = 'название А-Я' | 'название Я-А' | 'дешевые' | 'дорогие' | 'большой объём' | 'маленький объём' | 'много на складе' | 'мало на складе'
+export type Sort = 'название А-Я' |
+    'название Я-А' |
+    'дешевые' |
+    'дорогие' |
+    'большой объём' |
+    'маленький объём' |
+    'много на складе' |
+    'мало на складе'
 
 type RGB = `rgb(${number}, ${number}, ${number})`;
 type RGBA = `rgba(${number}, ${number}, ${number}, ${number})`;

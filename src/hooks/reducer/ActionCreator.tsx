@@ -20,19 +20,44 @@ export const fetchProducts = () => (dispatch: AppDispatch) => {
 			dispatch(dataSlice.actions.changeFilterName(name));
 		}
 		if (price0 !== null && price1 !== null) {
-			dispatch(dataSlice.actions.changeFilterSlider({ key: 'price', value: [JSON.parse(price0), JSON.parse(price1)] }));
+			dispatch(dataSlice.actions.changeFilterSlider(
+				{
+					key: 'price',
+					value: [JSON.parse(price0), JSON.parse(price1)]
+				}
+			));
 		}
 		if (packaging0 !== null && packaging1 !== null) {
-			dispatch(dataSlice.actions.changeFilterSlider({ key: 'packaging', value: [JSON.parse(packaging0), JSON.parse(packaging1)] }));
+			dispatch(dataSlice.actions.changeFilterSlider(
+				{
+					key: 'packaging',
+					value: [JSON.parse(packaging0), JSON.parse(packaging1)]
+				}
+			));
 		}
 		if (brand !== null) {
-			dispatch(dataSlice.actions.changeFilterLocalStorage({ key: 'brand', value: JSON.parse(brand) }));
+			dispatch(dataSlice.actions.changeFilterLocalStorage(
+				{ 
+					key: 'brand', 
+					value: JSON.parse(brand) 
+				}
+			));
 		}
 		if (subtype !== null) {
-			dispatch(dataSlice.actions.changeFilterLocalStorage({ key: 'subtype', value: JSON.parse(subtype) }));
+			dispatch(dataSlice.actions.changeFilterLocalStorage(
+				{ 
+					key: 'subtype', 
+					value: JSON.parse(subtype) 
+				}
+			));
 		}
 		if (type !== null) {
-			dispatch(dataSlice.actions.changeFilterLocalStorage({ key: 'type', value: JSON.parse(type) }));
+			dispatch(dataSlice.actions.changeFilterLocalStorage(
+				{ 
+					key: 'type', 
+					value: JSON.parse(type) 
+				}
+			));
 		}
 		if (sort !== null) {
 			if (sort === 'название А-Я' ||

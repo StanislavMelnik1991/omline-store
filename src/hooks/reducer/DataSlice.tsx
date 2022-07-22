@@ -79,7 +79,9 @@ export const dataSlice = createSlice({
 		productsFetching(state) {
 			state.isLoading = true;
 		},
-		productsFetchingSuccess(state, action: PayloadAction<{ [article: string]: Product }>) {
+		productsFetchingSuccess(state, action: PayloadAction<{
+			[article: string]: Product
+		}>) {
 			state.basketIsChange = false;
 			state.isLoading = false;
 			state.error = '';
@@ -97,11 +99,19 @@ export const dataSlice = createSlice({
 				product.stockQuantity = Number(product.stockQuantity);
 				product.basketQuantity = 0;
 
-				state.priceLimit[0] = product.price < state.priceLimit[0] ? product.price : state.priceLimit[0];
-				state.priceLimit[1] = product.price > state.priceLimit[1] ? product.price : state.priceLimit[1];
+				state.priceLimit[0] = product.price < state.priceLimit[0] ?
+					product.price :
+					state.priceLimit[0];
+				state.priceLimit[1] = product.price > state.priceLimit[1] ?
+					product.price :
+					state.priceLimit[1];
 
-				state.packaging[0] = product.packaging < state.packaging[0] ? product.packaging : state.packaging[0];
-				state.packaging[1] = product.packaging > state.packaging[1] ? product.packaging : state.packaging[1];
+				state.packaging[0] = product.packaging < state.packaging[0] ?
+					product.packaging :
+					state.packaging[0];
+				state.packaging[1] = product.packaging > state.packaging[1] ?
+					product.packaging :
+					state.packaging[1];
 
 				product.quantity = 1;
 				state.brands.push(product.brand);
@@ -125,7 +135,9 @@ export const dataSlice = createSlice({
 
 
 			state.filteredProducts = state.productsArray;
-			state.productsForRender = state.filteredProducts.slice((state.page - 1) * state.limit, state.page * state.limit);
+			state.productsForRender = state.filteredProducts.slice(
+				(state.page - 1) * state.limit, state.page * state.limit
+			);
 			state.pageLimit = Math.ceil(state.productsArray.length / state.limit);
 		},
 		productsFetchingError(state, action: PayloadAction<string>) {
@@ -146,7 +158,9 @@ export const dataSlice = createSlice({
 
 			state.page = state.page < 1 ? 1 : state.page;
 			state.page = state.page > state.pageLimit ? state.pageLimit : state.page;
-			state.productsForRender = state.filteredProducts.slice((state.page - 1) * state.limit, state.page * state.limit);
+			state.productsForRender = state.filteredProducts.slice(
+				(state.page - 1) * state.limit, state.page * state.limit
+			);
 		},
 		changeSort(state, action: PayloadAction<Sort>) {
 			state.sort = action.payload;
@@ -171,16 +185,37 @@ export const dataSlice = createSlice({
 			};
 			window.localStorage.clear();
 		},
-		changeFilterSlider(state, action: PayloadAction<{ key: 'price' | 'packaging', value: [number, number] }>) {
+		changeFilterSlider(state, action: PayloadAction<
+			{
+				key: 'price' | 'packaging',
+				value: [number, number]
+			}
+		>) {
 			state.filters[action.payload.key] = action.payload.value;
-			window.localStorage.setItem(action.payload.key+'0', JSON.stringify(action.payload.value[0]));
-			window.localStorage.setItem(action.payload.key+'1', JSON.stringify(action.payload.value[1]));
+			window.localStorage.setItem(
+				action.payload.key + '0',
+				JSON.stringify(action.payload.value[0])
+			);
+			window.localStorage.setItem(
+				action.payload.key + '1',
+				JSON.stringify(action.payload.value[1])
+			);
 		},
-		changeFilterCheckbox(state, action: PayloadAction<{ key: 'brand' | 'subtype' | 'type', value: string }>) {
+		changeFilterCheckbox(state, action: PayloadAction<
+			{
+				key: 'brand' | 'subtype' | 'type',
+				value: string
+			}
+		>) {
 			state.filters[action.payload.key][action.payload.value] = !state.filters[action.payload.key][action.payload.value];
-			window.localStorage.setItem(action.payload.key, JSON.stringify(state.filters[action.payload.key]) );
+			window.localStorage.setItem(action.payload.key, JSON.stringify(state.filters[action.payload.key]));
 		},
-		changeFilterLocalStorage(state, action: PayloadAction<{ key: 'brand' | 'subtype' | 'type', value: {[name: string]: boolean} }>) {
+		changeFilterLocalStorage(state, action: PayloadAction<
+			{
+				key: 'brand' | 'subtype' | 'type',
+				value: { [name: string]: boolean }
+			}
+		>) {
 			state.filters[action.payload.key] = action.payload.value;
 		},
 		changeFilterName(state, action: PayloadAction<string>) {
@@ -218,17 +253,24 @@ export const dataSlice = createSlice({
 		},
 		filter(state) {
 			//price filter
-			state.filteredProducts = state.productsArray.filter((el) => (state.products[el].price >= state.filters.price[0] && state.products[el].price <= state.filters.price[1]));
+			state.filteredProducts = state.productsArray.filter((el) => (
+				state.products[el].price >= state.filters.price[0] && state.products[el].price <= state.filters.price[1]
+			));
 			//brand filter
 			state.filteredProducts = state.filteredProducts.filter((el) => state.filters.brand[state.products[el].brand]);
 			//packaging
-			state.filteredProducts = state.filteredProducts.filter((el) => (state.products[el].packaging >= state.filters.packaging[0] && state.products[el].packaging <= state.filters.packaging[1]));
+			state.filteredProducts = state.filteredProducts.filter((el) => (
+				state.products[el].packaging >= state.filters.packaging[0] 
+				&& state.products[el].packaging <= state.filters.packaging[1]
+			));
 			//subtype
 			state.filteredProducts = state.filteredProducts.filter((el) => state.filters.subtype[state.products[el].subtype]);
 			//type
 			state.filteredProducts = state.filteredProducts.filter((el) => state.filters.type[state.products[el].type]);
 			//name
-			state.filteredProducts = state.filteredProducts.filter((el) => { if (state.products[el].fullName.toLowerCase().indexOf(state.filters.name.trim().toLowerCase()) > -1) return true; });
+			state.filteredProducts = state.filteredProducts.filter((el) => { 
+				if (state.products[el].fullName.toLowerCase().indexOf(state.filters.name.trim().toLowerCase()) > -1) return true; 
+			});
 
 			state.page = 1;
 			state.pageLimit = Math.ceil(state.filteredProducts.length / state.limit);
@@ -254,12 +296,25 @@ export const dataSlice = createSlice({
 						else { return 1; }
 					});
 				},
-				'дешевые': () => { state.productsArray = state.productsArray.sort((a, b) => { return state.products[a].price - state.products[b].price; }); },
-				'дорогие': () => { state.productsArray = state.productsArray.sort((a, b) => { return state.products[b].price - state.products[a].price; }); },
-				'большой объём': () => { state.productsArray = state.productsArray.sort((a, b) => { return state.products[b].packaging - state.products[a].packaging; }); },
-				'маленький объём': () => { state.productsArray = state.productsArray.sort((a, b) => { return state.products[a].packaging - state.products[b].packaging; }); },
-				'много на складе': () => { state.productsArray = state.productsArray.sort((a, b) => { return state.products[b].stockQuantity - state.products[a].stockQuantity; }); },
-				'мало на складе': () => { state.productsArray = state.productsArray.sort((a, b) => { return state.products[a].stockQuantity - state.products[b].stockQuantity; }); },
+				'дешевые': () => { 
+					state.productsArray = state.productsArray.sort((a, b) => { 
+						return state.products[a].price - state.products[b].price; 
+					}); },
+				'дорогие': () => { state.productsArray = state.productsArray.sort((a, b) => { 
+					return state.products[b].price - state.products[a].price; 
+				}); },
+				'большой объём': () => { state.productsArray = state.productsArray.sort((a, b) => { 
+					return state.products[b].packaging - state.products[a].packaging; 
+				}); },
+				'маленький объём': () => { state.productsArray = state.productsArray.sort((a, b) => { 
+					return state.products[a].packaging - state.products[b].packaging; 
+				}); },
+				'много на складе': () => { state.productsArray = state.productsArray.sort((a, b) => { 
+					return state.products[b].stockQuantity - state.products[a].stockQuantity; 
+				}); },
+				'мало на складе': () => { state.productsArray = state.productsArray.sort((a, b) => { 
+					return state.products[a].stockQuantity - state.products[b].stockQuantity; 
+				}); },
 			};
 			sortFunc[state.sort]();
 		}

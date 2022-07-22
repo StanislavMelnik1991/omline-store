@@ -9,7 +9,7 @@ export function Cards() {
 	const { productsForRender, page, isLoading, products, color } = useAppSelector(state => state.dataReducer);
 	const { pagination } = dataSlice.actions;
 	const dispatch = useAppDispatch();
-	const st = { background: `radial-gradient(100% 120.42% at 0% 0%, ${color.cards} 10%, ${color.bodyFirst} 100%)` };
+	const background = { background: `radial-gradient(100% 120.42% at 0% 0%, ${color.cards} 10%, ${color.bodyFirst} 100%)` };
 	return (
 		<div className={style.wrapper}>
 			<SortProducts />
@@ -36,13 +36,13 @@ export function Cards() {
 				}
 			</div>
 			<div className={style.pagination}>
-				<button style={st}
+				<button style={background}
 					className={style.pagination_buttons}
 					onClick={() => dispatch(pagination('first'))} 
 					disabled={isLoading}><InlineSVG src={require('../../../assets/to_start.svg')}
 						className={style.logo} />
 				</button>
-				<button style={st}
+				<button style={background}
 					className={style.pagination_buttons}
 					onClick={() => dispatch(pagination(-1))}
 					disabled={isLoading}>
@@ -50,7 +50,7 @@ export function Cards() {
 						className={style.logo} />
 				</button>
 				<p>{page}</p>
-				<button style={st}
+				<button style={background}
 					className={style.pagination_buttons}
 					onClick={() => dispatch(pagination(1))}
 					disabled={isLoading}>
@@ -58,7 +58,7 @@ export function Cards() {
 						className={style.logo} />
 				</button>
 				<button
-					style={st}
+					style={background}
 					className={style.pagination_buttons}
 					onClick={() => dispatch(pagination('last'))}
 					disabled={isLoading}><InlineSVG

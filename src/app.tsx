@@ -14,9 +14,14 @@ export function App() {
 	useEffect(() => {
 		dispatch(fetchProducts());
 	}, []);
-
+	const background = { 
+		background: `url(${mask}), radial-gradient(100% 215.42% at 0% 0%, 
+			${color.bodyFirst} 0%, 
+			${color.bodySecond} 180%`, 
+		minHeight: '100vh' 
+	};
 	return (
-		<div style={{ background: `url(${mask}), radial-gradient(100% 215.42% at 0% 0%, ${color.bodyFirst} 0%, ${color.bodySecond} 180%`, minHeight: '100vh' }}>
+		<div style={background}>
 			<Header />
 			<Main />
 			<Footer />
