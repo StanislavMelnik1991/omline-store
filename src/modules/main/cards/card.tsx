@@ -1,6 +1,5 @@
-import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { dataSlice } from '../../../hooks/reducer/DataSlice';
+import { dataSlice } from '@reducer/DataSlice';
 import * as style from './cards.css';
 type CardType = {
 	src: string;

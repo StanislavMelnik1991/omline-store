@@ -1,9 +1,8 @@
-import React from 'react';
 import * as style from './main.css';
 import { Cards } from './cards/cards';
 import { Preview } from './preview/preview';
 import { Filters } from './filters/filters';
-import { Basket } from './basket/baset';
+import { Basket } from './basket/basket';
 
 export function Main() {
 	return (

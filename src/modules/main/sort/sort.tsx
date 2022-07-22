@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import * as style from './sort.css';
 import { dataSlice } from '../../../hooks/reducer/DataSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';

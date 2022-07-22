@@ -5,14 +5,17 @@
     "strict": true,
     "module": "es6",
     "target": "es5",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "paths": {
+      "@reducer/*": ["./src/hooks/reducer/*"],
+    }
   },
   "files": [
-    "Online-Store/src/index.tsx",
-    "./Online-Store/module.d.ts"
+    "./src/index.tsx",
+    "./module.d.ts"
   ],
   "strict": true,
   "noImplicitAny": true

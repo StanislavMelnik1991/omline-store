@@ -7,7 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
-
 const isProduction = process.env.NODE_ENV == 'production';
 
 
@@ -16,9 +15,9 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 
 
 const config = {
-	entry: './Online-Store/src/index.tsx',
+	entry: './src/index.tsx',
 	output: {
-		path: path.resolve(__dirname, 'Online-Store/dist'),
+		path: path.resolve(__dirname, './dist'),
 	},
 	devServer: {
 		open: true,
@@ -26,10 +25,10 @@ const config = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: './Online-Store/index.html',
+			template: './index.html',
 			minify: false,
 			inject: 'body',
-			favicon: './Online-Store/src/assets/logo.svg'
+			favicon: './src/assets/logo.svg'
 		}),
 		new EslintPlugin({ extensions: 'ts' }),
 		
@@ -77,6 +76,10 @@ const config = {
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+		alias: {
+			'@': path.join(__dirname, './src'),
+			'@reducer': path.join(__dirname, './src/hooks/reducer')
+		}
 	},
 };
 
