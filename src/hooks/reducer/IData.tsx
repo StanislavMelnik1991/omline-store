@@ -30,7 +30,7 @@ export interface Filters {
     type: {
         [name: string]: boolean;
     },
-    sort: Record<Sort, boolean>;
+    
     name: string;
 }
 export type Sort = 'название А-Я' |

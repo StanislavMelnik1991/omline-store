@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import * as style from './sort.css';
 import { dataSlice } from '../../../hooks/reducer/DataSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { Sort } from '@reducer/IData';
 
 export function SortProducts() {
 	const { sortData, filter, changeSort } = dataSlice.actions;
 	const { filters, sort } = useAppSelector(state => state.dataReducer);
 	const dispatch = useAppDispatch();
-	const sortValue = Object.keys(filters.sort);
+	const sortValue: Array<Sort> = ['название А-Я', 'название Я-А', 'много на складе', 'мало на складе', 'большой объём', 'маленький объём', 'дорогие', 'дешевые'];
 	useEffect(() => {
 		dispatch(sortData());
 		dispatch(filter());
@@ -16,6 +17,7 @@ export function SortProducts() {
 		<h4 className={style.title}>{'сортировать по: '}</h4>
 		<select
 			name="sort"
+			value={sort}
 			onChange={(ev) => {
 				//<---------------------to refactor----------------------->
 				if (ev.target.value === 'название А-Я' ||

@@ -45,7 +45,7 @@ const initialState: DataState = {
 	error: '',
 	priceLimit: [100000000, 0],
 	pageLimit: 0,
-	sort: 'много на складе',
+	sort: 'дешевые',
 	filters: {
 		price: [0, 0],
 		brand: {},
@@ -53,16 +53,6 @@ const initialState: DataState = {
 		subtype: {},
 		type: {},
 		name: '',
-		sort: {
-			'название А-Я': true,
-			'название Я-А': false,
-			'дешевые': false,
-			'дорогие': false,
-			'большой объём': false,
-			'маленький объём': false,
-			'мало на складе': false,
-			'много на складе': false
-		}
 	},
 	color: {
 		bodyFirst: 'rgb(240, 240, 240)',
@@ -173,16 +163,7 @@ export const dataSlice = createSlice({
 			state.subtypes.map((el) => { state.filters.subtype[el] = true; });
 			state.types.map((el) => { state.filters.type[el] = true; });
 			state.filters.name = '';
-			state.filters.sort = {
-				'название А-Я': true,
-				'название Я-А': false,
-				'дешевые': false,
-				'дорогие': false,
-				'большой объём': false,
-				'маленький объём': false,
-				'мало на складе': false,
-				'много на складе': false
-			};
+			state.sort = 'название А-Я';
 			window.localStorage.clear();
 		},
 		changeFilterSlider(state, action: PayloadAction<
@@ -260,7 +241,7 @@ export const dataSlice = createSlice({
 			state.filteredProducts = state.filteredProducts.filter((el) => state.filters.brand[state.products[el].brand]);
 			//packaging
 			state.filteredProducts = state.filteredProducts.filter((el) => (
-				state.products[el].packaging >= state.filters.packaging[0] 
+				state.products[el].packaging >= state.filters.packaging[0]
 				&& state.products[el].packaging <= state.filters.packaging[1]
 			));
 			//subtype
@@ -268,8 +249,8 @@ export const dataSlice = createSlice({
 			//type
 			state.filteredProducts = state.filteredProducts.filter((el) => state.filters.type[state.products[el].type]);
 			//name
-			state.filteredProducts = state.filteredProducts.filter((el) => { 
-				if (state.products[el].fullName.toLowerCase().indexOf(state.filters.name.trim().toLowerCase()) > -1) return true; 
+			state.filteredProducts = state.filteredProducts.filter((el) => {
+				if (state.products[el].fullName.toLowerCase().indexOf(state.filters.name.trim().toLowerCase()) > -1) return true;
 			});
 
 			state.page = 1;
@@ -296,25 +277,36 @@ export const dataSlice = createSlice({
 						else { return 1; }
 					});
 				},
-				'дешевые': () => { 
-					state.productsArray = state.productsArray.sort((a, b) => { 
-						return state.products[a].price - state.products[b].price; 
-					}); },
-				'дорогие': () => { state.productsArray = state.productsArray.sort((a, b) => { 
-					return state.products[b].price - state.products[a].price; 
-				}); },
-				'большой объём': () => { state.productsArray = state.productsArray.sort((a, b) => { 
-					return state.products[b].packaging - state.products[a].packaging; 
-				}); },
-				'маленький объём': () => { state.productsArray = state.productsArray.sort((a, b) => { 
-					return state.products[a].packaging - state.products[b].packaging; 
-				}); },
-				'много на складе': () => { state.productsArray = state.productsArray.sort((a, b) => { 
-					return state.products[b].stockQuantity - state.products[a].stockQuantity; 
-				}); },
-				'мало на складе': () => { state.productsArray = state.productsArray.sort((a, b) => { 
-					return state.products[a].stockQuantity - state.products[b].stockQuantity; 
-				}); },
+				'дешевые': () => {
+					state.productsArray = state.productsArray.sort((a, b) => {
+						return state.products[a].price - state.products[b].price;
+					});
+				},
+				'дорогие': () => {
+					state.productsArray = state.productsArray.sort((a, b) => {
+						return state.products[b].price - state.products[a].price;
+					});
+				},
+				'большой объём': () => {
+					state.productsArray = state.productsArray.sort((a, b) => {
+						return state.products[b].packaging - state.products[a].packaging;
+					});
+				},
+				'маленький объём': () => {
+					state.productsArray = state.productsArray.sort((a, b) => {
+						return state.products[a].packaging - state.products[b].packaging;
+					});
+				},
+				'много на складе': () => {
+					state.productsArray = state.productsArray.sort((a, b) => {
+						return state.products[b].stockQuantity - state.products[a].stockQuantity;
+					});
+				},
+				'мало на складе': () => {
+					state.productsArray = state.productsArray.sort((a, b) => {
+						return state.products[a].stockQuantity - state.products[b].stockQuantity;
+					});
+				},
 			};
 			sortFunc[state.sort]();
 		}
